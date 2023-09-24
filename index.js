@@ -7,63 +7,34 @@
 const { legacy_createStore } = require("redux");
 
 // constants
-const INCREMENT = "INCREMENT";
-const DECREMENT = "DECREMENT";
-const RESET = "RESET";
-const INCREMENT_BY_VALUE = "INCREMENT_BY_VALUE";
+const USER_INCREMENT = "USER_INCREMENT";
+
 
 // state
 const initialState = {
-  count: 0,
+  user: ["Mridul"],
+  count: 1,
 };
 
 // action
-const incrementCount = () => {
+const userIncrement = (users) => {
   return {
-    type: INCREMENT,
+    type: USER_INCREMENT,
+    payload: users
   };
 };
-const decrementCount = () => {
-  return {
-    type: DECREMENT,
-  };
-};
-const resetCount = () => {
-    return {
-      type: RESET,
-    };
-  };
-  const incrementByValue = (value) => {
-    return {
-      type: INCREMENT_BY_VALUE,
-      payload: value
-    };
-  };
+
 
 // reducer
 const counterReducer = (state = initialState, action) => {
   switch (action.type) {
-    case INCREMENT:
+    case USER_INCREMENT:
       return {
         ...state,
         count: state.count + 1,
+        user: [...state.user, action.payload]
       };
-    case DECREMENT:
-      return {
-        ...state,
-        count: state.count - 1,
-      };
-      case RESET:
-      return {
-        ...state,
-        count: 0,
-      };
-      case INCREMENT_BY_VALUE:
-      return {
-        ...state,
-        count: state.count + action.payload,
-      };
-
+   
     default:
       state;
   }
@@ -81,5 +52,6 @@ store.subscribe(()=> {
 // store.dispatch(incrementCount())
 // store.dispatch(decrementCount())
 // store.dispatch(resetCount())
-store.dispatch(incrementByValue(5))
-store.dispatch(incrementByValue(15))
+// store.dispatch(incrementByValue(5))
+store.dispatch(userIncrement("Hosen"))
+store.dispatch(userIncrement("Kibria"))
