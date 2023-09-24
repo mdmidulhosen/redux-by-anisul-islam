@@ -10,6 +10,7 @@ const { legacy_createStore } = require("redux");
 const INCREMENT = "INCREMENT";
 const DECREMENT = "DECREMENT";
 const RESET = "RESET";
+const INCREMENT_BY_VALUE = "INCREMENT_BY_VALUE";
 
 // state
 const initialState = {
@@ -32,6 +33,12 @@ const resetCount = () => {
       type: RESET,
     };
   };
+  const incrementByValue = (value) => {
+    return {
+      type: INCREMENT_BY_VALUE,
+      payload: value
+    };
+  };
 
 // reducer
 const counterReducer = (state = initialState, action) => {
@@ -51,6 +58,11 @@ const counterReducer = (state = initialState, action) => {
         ...state,
         count: 0,
       };
+      case INCREMENT_BY_VALUE:
+      return {
+        ...state,
+        count: state.count + action.payload,
+      };
 
     default:
       state;
@@ -64,8 +76,10 @@ store.subscribe(()=> {
     console.log(store.getState())
 })
 
-store.dispatch(incrementCount())
-store.dispatch(incrementCount())
-store.dispatch(incrementCount())
-store.dispatch(decrementCount())
-store.dispatch(resetCount())
+// store.dispatch(incrementCount())
+// store.dispatch(incrementCount())
+// store.dispatch(incrementCount())
+// store.dispatch(decrementCount())
+// store.dispatch(resetCount())
+store.dispatch(incrementByValue(5))
+store.dispatch(incrementByValue(15))
