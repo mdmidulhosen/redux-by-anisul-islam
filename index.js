@@ -4,7 +4,7 @@
 // reducer
 // store
 
-const { createStore } = require("redux");
+const { legacy_createStore } = require("redux");
 
 // constants
 const INCREMENT = "INCREMENT";
@@ -58,7 +58,7 @@ const counterReducer = (state = initialState, action) => {
 };
 
 // store
-const store = createStore(counterReducer);
+const store = legacy_createStore(counterReducer);
 
 store.subscribe(()=> {
     console.log(store.getState())
